@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="form-inline">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" [(ngModel)]="query" >
+    <button class="btn btn-success" (click)="tweets()">Search</button>
+  </div>
+</nav>
+<br>
+
+<div class="container">
+  <div class="card" *ngFor="let tweet of tweetResult" style="margin: 20px;border: solid rgb(68, 68, 68) 1px;" class="search-results"
+      infinite-scroll
+      [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollUpDistance]="scrollUpDistance"
+      [infiniteScrollThrottle]="throttle"
+      (scrolled)="onScrollDown()"
+>
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-2">
+          <img [src]="tweet.user.profile_image_url" class="rounded-circle" alt="Cinque Terre"
+            width="104" height="66">
+        </div>
+        <div class="col-md-9">
+          <br>
+          <h6>{{ tweet.user.name }} @{{tweet.user.screen_name}} {{tweet.created_at}}</h6>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">{{ tweet.text }}</div>
+  </div>
+</div>
